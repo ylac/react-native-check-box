@@ -36,11 +36,13 @@ export default class CheckBox extends Component {
         checkedImage: React.PropTypes.element,
         unCheckedImage: React.PropTypes.element,
         onClick: React.PropTypes.func.isRequired,
-        isChecked: React.PropTypes.bool
+        isChecked: React.PropTypes.bool,
+        enabled: React.PropTypes.bool
 
     }
     static defaultProps = {
         isChecked: false,
+				enabled:true,
         leftTextStyle: {},
         rightTextStyle: {}
     }
@@ -86,6 +88,7 @@ export default class CheckBox extends Component {
     render() {
         return (
             <TouchableHighlight
+								disabled={!this.props.enabled}
                 style={this.props.style}
                 onPress={()=>this.onClick()}
                 underlayColor='transparent'
