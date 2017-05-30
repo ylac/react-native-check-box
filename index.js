@@ -37,14 +37,16 @@ export default class CheckBox extends Component {
         unCheckedImage: React.PropTypes.element,
         onClick: React.PropTypes.func.isRequired,
         isChecked: React.PropTypes.bool,
-        enabled: React.PropTypes.bool
+        enabled: React.PropTypes.bool,
+        hitSlop: React.PropTypes.number
 
     }
     static defaultProps = {
         isChecked: false,
 				enabled:true,
         leftTextStyle: {},
-        rightTextStyle: {}
+        rightTextStyle: {},
+        hitSlop: 0
     }
 
     _renderLeft() {
@@ -86,12 +88,14 @@ export default class CheckBox extends Component {
     }
 
     render() {
+        const { hitSlop } = this.props;
         return (
             <TouchableHighlight
-								disabled={!this.props.enabled}
-                style={this.props.style}
-                onPress={()=>this.onClick()}
-                underlayColor='transparent'
+              disabled={!this.props.enabled}
+              style={this.props.style}
+              onPress={()=>this.onClick()}
+              underlayColor='transparent'
+              hitSlop={{top: hitSlop, left: hitSlop, bottom: hitSlop, right: hitSlop}}
             >
                 <View style={styles.container}>
                     {this._renderLeft()}
